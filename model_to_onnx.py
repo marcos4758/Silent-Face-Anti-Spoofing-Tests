@@ -37,11 +37,13 @@ if __name__ == "__main__":
 
     model_27 = AntiSpoofPredict(0)
     model_27._load_model(args.model_path_27)
+    model_27.model.eval()
     h_input, w_input, _, _ = parse_model_name(os.path.basename(args.model_path_27))
     model_27_input_size = (h_input, w_input)
 
     model_40 = AntiSpoofPredict(0)
     model_40._load_model(args.model_path_40)
+    model_40.model.eval()
     h_input, w_input, _, _ = parse_model_name(os.path.basename(args.model_path_40))
     model_40_input_size = (h_input, w_input)
 
