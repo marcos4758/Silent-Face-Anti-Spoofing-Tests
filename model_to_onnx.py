@@ -26,9 +26,9 @@ if __name__ == "__main__":
     p.add_argument("--model_path_40", type=str, help="Path to .pth model weights (MiniFASNetV1SE 4.0)")
     p.add_argument(
         "--print_summary",
-        type=bool,
+        action=argparse.BooleanOptionalAction,
         default=False,
-        help="Whether to print the model information (torchsummary is needed)",
+        help="Whether to print the model information (torchinfo is needed)",
     )
     args = p.parse_args()
 
@@ -53,11 +53,11 @@ if __name__ == "__main__":
     print("Models loaded successfully")
 
     if args.print_summary:
-        from torchsummary import summary
+        from torchinfo import summary
 
         for model_dict in models:
             print("\nModel summary:", model_dict["path"])
-            summary(model_dict["model"], (3, model_dict["input_size"][0], model_dict["input_size"][1]))
+            summary(model_dict["model"], input_size=(1, 3, model_dict["input_size"][0], model_dict["input_size"][1]))
 
     # Convert model to onnx
     for model_dict in models:
